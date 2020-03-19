@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket</title>
+    <script type="text/javascript">
+      var socket;
+      if (!window.WebSocket) {
+        window.WebSocket = window.MozWebSocket;
+      }
+      if (window.WebSocket) {
+        // socket = new WebSocket("wss://echo.websocket.org");
+        socket = new WebSocket("ws://localhost:8080/");
+        socket.addEventListener('open', function (event) {
+          console.log('[Open]: ', event);
+        });
+
+        socket.addEventListener('message', function (event) {
+          console.log('[Message]: ', event.data);
+        });
+
+        socket.addEventListener('close', function (event) {
+          console.log('[Close]: ', event);
+        });
+
+        socket.addEventListener('error', function (event) {
+          console.error('[Error]: ', event);
+        });
+      } else {
+        alert("你的浏览器不支持 WebSocket！");
+      }
+
+      function send(message) {
+        if (!window.WebSocket) {
+          return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+          socket.send(new Date());
+        } else {
+          alert("连接没有开启.");
+        }
+      }
+    </script>
+</head>
+<body>
+<form onsubmit="return false;">
+    <input type="text" name="message" style="width: 300px" value="Welcome to waylau.com">
+    <input type="button" value="发送消息" onclick="send()"/>
+</form>
+</body>
+</html>

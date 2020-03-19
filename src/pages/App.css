@@ -1,0 +1,19 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 20px;
+}
+
+.Item {
+  width: 100vw;
+  max-width: 998px;
+  margin-top: 4vh;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.Item:last-child {
+  margin-bottom: 4vh;
+}
